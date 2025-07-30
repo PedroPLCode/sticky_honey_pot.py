@@ -1,6 +1,6 @@
 import socket
 import threading
-import datetime
+from datetime import datetime as dt
 from exception_handler import exception_handler
 from logger import create_alert_log_msg
 from geoip import geoip_lookup
@@ -17,7 +17,7 @@ def handle_client(client_socket, ip, port, service):
 
         threats = detect_exploit(data)
         geo = geoip_lookup(ip)
-        timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp=dt.now().strftime("%Y-%m-%d %H:%M:%S")
         
         log_msg = create_alert_log_msg(timestamp, ip, port, service, data, geo, threats)
         save_log_and_send_telegram(log_msg)
@@ -34,7 +34,7 @@ def start_server(port, service):
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(("0.0.0.0", port))
     server.listen(5)
-    start_msg = f"[+] Honeypot listening on port {port} as {service}"
+    start_msg = f"Honeypot listening on port {port} as {service}"
     save_log_and_send_telegram(start_msg)
 
     while True:

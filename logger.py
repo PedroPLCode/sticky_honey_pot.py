@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime as dt
 from exception_handler import exception_handler
 from config import LOG_DIR
 
@@ -23,11 +23,11 @@ def save_log(log_msg):
     log_dir = LOG_DIR
     os.makedirs(log_dir, exist_ok=True)
 
-    timestamp=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp=dt.now().strftime("%Y-%m-%d %H:%M:%S")
     date_str = timestamp.split(" ")[0]
     log_file = os.path.join(log_dir, f"honeypot_log_{date_str}.txt")
 
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(log_msg)
         
-    print(f"{log_msg}\n\nLog updated succesfully.")
+    print(f"{log_msg} - Log updated succesfully.")
