@@ -3,7 +3,7 @@ import threading
 import datetime
 
 from config import PORTS
-from db import init_db, save_log
+from logger import save_log
 from geoip import geoip_lookup
 
 from exploit_detector import detect_exploit, classify_threat

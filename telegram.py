@@ -1,6 +1,4 @@
 import requests
-
-# Ustaw to w config.py
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 def send_telegram(ip, port, service, data, geo, threats=None):

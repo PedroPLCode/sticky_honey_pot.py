@@ -1,0 +1,12 @@
+db przerobić na sqlalchemy
+czy w ogole potrzena db skoro są log.txt ???
+
+poprawa zeby wszystko działało
+
+refactoryzacja
+
+annotacje typów
+docstringi
+
+testy
+readme.md
