@@ -1,8 +1,12 @@
 import requests
+from retry_connection import retry_connection
+from exception_handler import exception_handler
+from config import IP_API_URL
 
+@exception_handler()
+@retry_connection()
 def geoip_lookup(ip):
-    try:
-        response = requests.get(f"http://ip-api.com/json/{ip}")
+        response = requests.get(f"{IP_API_URL}{ip}")
         data = response.json()
         return {
             "country": data.get("country", "Unknown"),
@@ -10,5 +14,3 @@ def geoip_lookup(ip):
             "city": data.get("city", "Unknown"),
             "isp": data.get("isp", "Unknown")
         }
-    except:
-        return {"country": "Unknown", "region": "Unknown", "city": "Unknown", "isp": "Unknown"}

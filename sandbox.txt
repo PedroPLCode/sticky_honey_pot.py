@@ -2,8 +2,10 @@ poprawa zeby wszystko działało
 logi
 telegram
 expeption handler
+retry connection
 
 refactoryzacja
+black
 
 annotacje typów
 docstringi

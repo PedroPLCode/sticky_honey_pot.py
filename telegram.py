@@ -1,23 +1,25 @@
-import requests
+import asyncio
+from telegram import Bot as TelegramBot
+from retry_connection import retry_connection
+from exception_handler import exception_handler
+from logger import save_log
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
-def send_telegram(ip, port, service, data, geo, threats=None):
-    msg = (
-        f"⚠️ *Honeypot Alert*\n"
-        f"*IP:* {ip}\n"
-        f"*Port:* {port} ({service})\n"
-        f"*Data:* `{data}`\n"
-        f"*Location:* {geo['country']}, {geo['city']} ({geo['isp']})"
-    )
-    if threats:
-        msg += f"\n*Threats:* {', '.join(threats)}"
+@exception_handler()
+@retry_connection()
+def init_telegram_bot() -> TelegramBot:
+    return TelegramBot(token=TELEGRAM_BOT_TOKEN)
 
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": msg,
-        "parse_mode": "Markdown"
-    }
-    try:
-        requests.post(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage", json=payload)
-    except Exception as e:
-        print(f"[!] Telegram error: {e}")
+
+@exception_handler(default_return=False)
+@retry_connection()
+def send_telegram(msg: str) -> bool:
+    telegram_bot = init_telegram_bot()
+
+    if telegram_bot:
+        asyncio.run(telegram_bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=msg))
+        log_msg = f"Telegram {TELEGRAM_CHAT_ID} {msg} sent succesfully."
+        save_log(log_msg)
+        return True
+
+    return False
