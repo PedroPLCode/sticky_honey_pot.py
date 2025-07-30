@@ -1,7 +1,7 @@
-db przerobić na sqlalchemy
-czy w ogole potrzena db skoro są log.txt ???
-
 poprawa zeby wszystko działało
+logi
+telegram
+expeption handler
 
 refactoryzacja
 
