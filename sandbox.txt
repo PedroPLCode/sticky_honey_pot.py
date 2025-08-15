@@ -1,14 +1,8 @@
-poprawa zeby wszystko działało
-logi
-telegram
-expeption handler
-retry connection
-
 refactoryzacja
 black
 
-annotacje typów
-docstringi
+annotacje typów dodać
+docstringi dodać
 
-testy
-readme.md
+testy pytest dodać do całości
+README.md napisać

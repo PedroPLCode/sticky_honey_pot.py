@@ -1,11 +1,11 @@
 import socket
 import threading
 from datetime import datetime as dt
-from exception_handler import exception_handler
-from logger import create_alert_log_msg
-from geoip import geoip_lookup
-from utils import save_log_and_send_telegram
-from exploit_detector import detect_exploit
+from utils.exception_handler import exception_handler
+from utils.logger import create_alert_log_msg
+from utils.geoip import geoip_lookup
+from utils.utils import save_log_and_send_telegram
+from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
 
 def handle_client(client_socket, ip, port, service):
@@ -45,6 +45,12 @@ def start_server(port, service):
 
 
 if __name__ == "__main__":
-    for port, service in PORTS.items():
-        t = threading.Thread(target=start_server, args=(port, service))
-        t.start()
+    try:
+        for port, service in PORTS.items():
+            t = threading.Thread(target=start_server, args=(port, service), daemon=True)
+            t.start()
+        while True:
+            pass
+    except KeyboardInterrupt:
+        shutdown_msg = "Honeypot shutting down."
+        save_log_and_send_telegram(shutdown_msg)

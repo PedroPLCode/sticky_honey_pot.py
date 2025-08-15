@@ -1,11 +1,9 @@
 import time
 import requests
 import smtplib
-from logger import save_log
-
+from utils.logger import save_log
 
 def retry_connection(max_retries=3, delay=1):
-
     def retry_connection_decorator(func):
         def retry_connection_wrapper(*args, **kwargs):
             retries = 0
