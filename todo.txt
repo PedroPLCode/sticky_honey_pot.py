@@ -1,3 +1,2 @@
 todo:
-# fix retry connetion
 # add pytests

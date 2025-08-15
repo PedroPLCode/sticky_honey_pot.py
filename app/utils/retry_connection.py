@@ -1,10 +1,12 @@
 import time
 import requests
 import smtplib
+from typing import Callable, Any, TypeVar
 from app.utils.alert_logs_utils import save_log
+F = TypeVar("F", bound=Callable[..., Any])
 
 
-def retry_connection(max_retries=3, delay=1):
+def retry_connection(max_retries: int = 3, delay: int = 1):
     """
     Decorator to retry a function upon connection-related exceptions.
 
@@ -21,8 +23,8 @@ def retry_connection(max_retries=3, delay=1):
     Raises:
             Exception: If the maximum number of retries is reached and the function still fails.
     """
-    def retry_connection_decorator(func):
-        def retry_connection_wrapper(*args, **kwargs):
+    def retry_connection_decorator(func: F) -> F:
+        def retry_connection_wrapper(*args: Any, **kwargs: dict[str, Any]) -> Any:
             retries = 0
             while retries < max_retries:
                 try:
@@ -35,13 +37,13 @@ def retry_connection(max_retries=3, delay=1):
                     OSError,
                 ) as e:
                     retries += 1
-                    retry_msg = f"retry_connection Connection failed (attempt {retries}/{max_retries}). Retrying in {delay} seconds..."
+                    retry_msg = f"retry_connection Connection failed (attempt {retries}/{max_retries}). Retrying in {delay} seconds...\n{str(e)}"
                     save_log(retry_msg)
                     time.sleep(delay)
             error_msg = f"retry_connection. Max retries reached. Connection failed. max_retries: {max_retries}, delay: {delay}"
             save_log(error_msg)
             raise Exception(error_msg)
 
-        return retry_connection_wrapper
+        return retry_connection_wrapper  # type: ignore
 
     return retry_connection_decorator
