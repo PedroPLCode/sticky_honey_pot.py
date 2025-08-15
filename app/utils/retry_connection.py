@@ -4,6 +4,22 @@ import smtplib
 from utils.logger import save_log
 
 def retry_connection(max_retries=3, delay=1):
+    """
+    Decorator to retry a function upon connection-related exceptions.
+
+    Retries the decorated function up to `max_retries` times with a delay of `delay` seconds between attempts.
+    Handles exceptions including ConnectionError, TimeoutError, requests.exceptions.RequestException,
+    smtplib.SMTPException, and OSError. Logs each retry attempt and raises an Exception if all retries fail.
+
+    Args:
+        func (callable): The function to decorate.
+
+    Returns:
+        callable: The wrapped function with retry logic.
+
+    Raises:
+        Exception: If the maximum number of retries is reached and the function still fails.
+    """
     def retry_connection_decorator(func):
         def retry_connection_wrapper(*args, **kwargs):
             retries = 0

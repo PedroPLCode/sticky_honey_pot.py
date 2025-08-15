@@ -1,3 +1,20 @@
+"""
+Configuration module for the honey pot application.
+
+Loads environment variables using dotenv and defines constants for bot integration,
+network service emulation, attack pattern detection, and logging.
+
+Attributes:
+    TELEGRAM_BOT_TOKEN (str): Telegram bot token loaded from environment.
+    TELEGRAM_CHAT_ID (str): Telegram chat ID loaded from environment.
+    IP_API_URL (str): URL for IP geolocation API.
+    LOG_DIR (str): Directory for storing logs.
+    PORTS (dict): Mapping of port numbers to service names (SSH, FTP, HTTP).
+    BANNER (dict): Service banners for emulated protocols.
+    SQL_ATTACK_PATTERNS (list): List of tuples containing regex patterns and attack type descriptions
+        for detecting various security threats, including SQL Injection, XSS, LFI, RFI, Command Injection,
+        Web Shells, SSTI, LDAP Injection, XXE, SSRF, and code execution/obfuscation.
+"""
 import os
 from dotenv import load_dotenv
 

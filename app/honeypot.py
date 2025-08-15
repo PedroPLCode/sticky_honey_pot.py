@@ -1,3 +1,22 @@
+"""
+A multi-threaded honeypot server that listens on specified ports, emulates various services, and logs suspicious activity.
+For each incoming connection, the honeypot sends a service-specific banner, receives data, detects potential exploits,
+Modules:
+    - socket: For network communication.
+    - threading: For handling multiple connections concurrently.
+    - datetime: For timestamping events.
+    - utils.exception_handler: Decorator for exception handling.
+    - utils.logger: For creating log messages.
+    - utils.geoip: For GeoIP lookups.
+    - utils.utils: For logging and sending Telegram alerts.
+    - utils.exploit_detector: For exploit detection.
+    - config: Contains service banners and port mappings.
+Functions:
+    - handle_client(client_socket, ip, port, service): Handles a single client connection, processes data, detects threats, logs, and alerts.
+    - start_server(port, service): Starts a honeypot server on a given port and service, spawning threads for each connection.
+Execution:
+    When run as the main module, starts honeypot servers for all configured ports/services and handles graceful shutdown on KeyboardInterrupt.
+"""
 import socket
 import threading
 from datetime import datetime as dt
@@ -9,6 +28,20 @@ from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
 
 def handle_client(client_socket, ip, port, service):
+    """
+    Handles an incoming client connection to the honeypot.
+    Sends a service-specific banner to the client, receives data, detects potential exploits,
+    performs GeoIP lookup, logs the event, and sends alerts via Telegram.
+    Args:
+        client_socket (socket.socket): The socket object representing the client connection.
+        ip (str): The IP address of the client.
+        port (int): The port number on which the client connected.
+        service (str): The name of the service being emulated.
+    Exceptions:
+        Logs and sends any exceptions encountered during handling.
+    Returns:
+        None
+    """
     try:
         banner = BANNER.get(service, "Hello.\n")
 
@@ -31,6 +64,21 @@ def handle_client(client_socket, ip, port, service):
 
 @exception_handler()
 def start_server(port, service):
+    """
+    Starts a honeypot server that listens for incoming TCP connections on the specified port and service.
+
+    Args:
+        port (int): The port number on which the server will listen for connections.
+        service (str): The name of the service to emulate (for logging and identification).
+
+    Side Effects:
+        - Binds a socket to all network interfaces on the given port.
+        - Logs a startup message and sends it via Telegram.
+        - For each incoming connection, spawns a new thread to handle the client.
+
+    Note:
+        The function runs indefinitely, accepting and handling connections in separate threads.
+    """
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(("0.0.0.0", port))
     server.listen(5)

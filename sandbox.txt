@@ -2,7 +2,6 @@ refactoryzacja
 black
 
 annotacje typów dodać
-docstringi dodać
 
 testy pytest dodać do całości
 README.md napisać

@@ -9,6 +9,18 @@ import traceback
 @exception_handler()
 @retry_connection()
 def send_telegram(msg: str) -> bool:
+    """
+    Sends a message to a specified Telegram chat using a bot.
+    This function attempts to send the provided message to the Telegram chat identified by `TELEGRAM_CHAT_ID`
+    using the bot token `TELEGRAM_BOT_TOKEN`. It handles both running and non-running asyncio event loops,
+    ensuring compatibility in synchronous and asynchronous contexts. The function logs the result of the operation.
+    Args:
+        msg (str): The message to send to the Telegram chat.
+    Returns:
+        bool: True if the message was sent successfully, False otherwise.
+    Logs:
+        - Success or failure of the message sending operation, including exception tracebacks on failure.
+    """
     try:
         bot = Bot(token=TELEGRAM_BOT_TOKEN)
         
