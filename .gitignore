@@ -1,11 +1,5 @@
-# .env file
-.env 
-
 # logs dir
 logs/
-
-# venv
-venv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

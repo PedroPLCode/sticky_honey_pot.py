@@ -1,6 +1,3 @@
 fix retry connetion
-
-refactoryzacja
-
 testy pytest dodać do całości
 README.md napisać
