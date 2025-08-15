@@ -3,7 +3,7 @@ import traceback
 from telegram import Bot
 from utils.retry_connection import retry_connection
 from utils.exception_handler import exception_handler
-from utils.logger import save_log
+from app.utils.alert_logs_utils import save_log
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 

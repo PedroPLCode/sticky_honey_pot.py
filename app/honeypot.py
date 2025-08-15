@@ -6,9 +6,9 @@ Modules:
     - threading: For handling multiple connections concurrently.
     - datetime: For timestamping events.
     - utils.exception_handler: Decorator for exception handling.
-    - utils.logger: For creating log messages.
+    - utils.alert_logs_utils: For creating log messages.
     - utils.geoip: For GeoIP lookups.
-    - utils.utils: For logging and sending Telegram alerts.
+    - utils.telegram_utils: For logging and sending Telegram alerts.
     - utils.exploit_detector: For exploit detection.
     - config: Contains service banners and port mappings.
 Functions:
@@ -22,9 +22,9 @@ import socket
 import threading
 from datetime import datetime as dt
 from utils.exception_handler import exception_handler
-from utils.logger import create_alert_log_msg
-from utils.geoip import geoip_lookup
-from utils.utils import save_log_and_send_telegram
+from app.utils.alert_logs_utils import create_alert_log_msg
+from app.utils.geoip_lookup import geoip_lookup
+from utils.alert_logs_utils import save_log_and_send_telegram
 from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
 

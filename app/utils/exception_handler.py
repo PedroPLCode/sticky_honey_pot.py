@@ -1,7 +1,5 @@
 import functools
-
 from typing import Callable, Any, TypeVar
-
 F = TypeVar("F", bound=Callable[..., Any])
 
 
@@ -20,7 +18,6 @@ def exception_handler(default_return: object = None) -> Callable[[F], F]:
     Returns:
         Callable: The wrapped function with exception handling.
     """
-
     def exception_handler_decorator(func: F) -> F:
         @functools.wraps(func)
         def exception_handler_wrapper(*args: Any, **kwargs: dict[str, Any]) -> Any:
@@ -28,7 +25,7 @@ def exception_handler(default_return: object = None) -> Callable[[F], F]:
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                from utils.utils import save_log_and_send_telegram
+                from utils.alert_logs_utils import save_log_and_send_telegram
 
                 save_log_and_send_telegram(f"Exception in {func.__name__}: {str(e)}")
             return default_return
