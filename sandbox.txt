@@ -1,3 +1,0 @@
-# fix retry connetion
-# testy pytest dodać do całości
-# README.md napisać

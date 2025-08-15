@@ -2,7 +2,7 @@
 A multi-threaded honeypot server that listens on specified ports, emulates various services, and logs suspicious activity.  
 For each incoming connection, the honeypot sends a service-specific banner, receives data, and detects potential exploits.
 
-## 📌 Features
+## Features
 - **Multi-threaded** – handles multiple connections concurrently.
 - **Service emulation** – sends service-specific banners.
 - **Threat detection** – identifies potential exploits.
@@ -10,7 +10,7 @@ For each incoming connection, the honeypot sends a service-specific banner, rece
 - **Alerting** – sends alerts via Telegram.
 - **Detailed logging** – timestamps, IP addresses, and attack details.
 
-## 📂 Modules
+## Modules
 - `socket` – network communication.
 - `threading` – concurrent connection handling.
 - `datetime` – event timestamping.
@@ -21,7 +21,7 @@ For each incoming connection, the honeypot sends a service-specific banner, rece
 - `utils.exploit_detector` – exploit detection.
 - `config` – service banners and port mappings.
 
-## 🛠 Installation
+## Installation
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/honeypot.git
