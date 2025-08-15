@@ -18,8 +18,8 @@ def retry_connection(max_retries=3, delay=1):
         callable: The wrapped function with retry logic.
 
     Raises:
-        Exception: If the maximum number of retries is reached and the function still fails.
-    """
+            Exception: If the maximum number of retries is reached and the function still fails.
+        """
     def retry_connection_decorator(func):
         def retry_connection_wrapper(*args, **kwargs):
             retries = 0

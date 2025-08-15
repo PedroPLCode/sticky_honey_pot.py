@@ -5,7 +5,7 @@ from config import IP_API_URL
 
 @exception_handler()
 @retry_connection()
-def geoip_lookup(ip):
+def geoip_lookup(ip: str):
         """
         Performs a GeoIP lookup for the given IP address using an external API.
 

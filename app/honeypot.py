@@ -27,7 +27,7 @@ from utils.utils import save_log_and_send_telegram
 from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
 
-def handle_client(client_socket, ip, port, service):
+def handle_client(client_socket: socket.socket, ip: str, port: int, service: str):
     """
     Handles an incoming client connection to the honeypot.
     Sends a service-specific banner to the client, receives data, detects potential exploits,
@@ -63,7 +63,7 @@ def handle_client(client_socket, ip, port, service):
 
 
 @exception_handler()
-def start_server(port, service):
+def start_server(port: int, service: str):
     """
     Starts a honeypot server that listens for incoming TCP connections on the specified port and service.
 

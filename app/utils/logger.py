@@ -4,7 +4,15 @@ from utils.exception_handler import exception_handler
 from config import LOG_DIR
 
 @exception_handler()
-def create_alert_log_msg(timestamp, ip, port, service, data, geo, threats=None):
+def create_alert_log_msg(
+    timestamp: str,
+    ip: str,
+    port: int | str,
+    service: str,
+    data: str,
+    geo: dict[str, str],
+    threats: list[str] | None = None
+):
     """
     Generates a formatted honeypot alert log message with details about a detected event.
     Args:
@@ -32,7 +40,7 @@ def create_alert_log_msg(timestamp, ip, port, service, data, geo, threats=None):
 
 
 @exception_handler()
-def save_log(log_msg):
+def save_log(log_msg: str):
     """
     Saves a log message to a daily log file and prints it to the console.
 
