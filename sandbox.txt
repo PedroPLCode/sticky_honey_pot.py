@@ -1,9 +1,6 @@
 fix retry connetion
 
 refactoryzacja
-black
-
-annotacje typów dodać
 
 testy pytest dodać do całości
 README.md napisać

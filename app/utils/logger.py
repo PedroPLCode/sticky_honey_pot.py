@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from utils.exception_handler import exception_handler
 from config import LOG_DIR
 
+
 @exception_handler()
 def create_alert_log_msg(
     timestamp: str,
@@ -11,7 +12,7 @@ def create_alert_log_msg(
     service: str,
     data: str,
     geo: dict[str, str],
-    threats: list[str] | None = None
+    threats: list[str] | None = None,
 ):
     """
     Generates a formatted honeypot alert log message with details about a detected event.
@@ -35,7 +36,7 @@ def create_alert_log_msg(
     )
     if threats:
         alert_log_msg += f"Threats: {', '.join(threats)}\n"
-        
+
     return alert_log_msg
 
 
@@ -57,7 +58,7 @@ def save_log(log_msg: str):
     log_dir = LOG_DIR
     os.makedirs(log_dir, exist_ok=True)
 
-    timestamp=dt.now().strftime("%Y-%m-%d %H:%M:%S")
+    timestamp = dt.now().strftime("%Y-%m-%d %H:%M:%S")
     date_str = timestamp.split(" ")[0]
     log_file = os.path.join(log_dir, f"honeypot_log_{date_str}.txt")
 

@@ -17,6 +17,7 @@ Functions:
 Execution:
     When run as the main module, starts honeypot servers for all configured ports/services and handles graceful shutdown on KeyboardInterrupt.
 """
+
 import socket
 import threading
 from datetime import datetime as dt
@@ -26,6 +27,7 @@ from utils.geoip import geoip_lookup
 from utils.utils import save_log_and_send_telegram
 from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
+
 
 def handle_client(client_socket: socket.socket, ip: str, port: int, service: str):
     """
@@ -50,8 +52,8 @@ def handle_client(client_socket: socket.socket, ip: str, port: int, service: str
 
         threats = detect_exploit(data)
         geo = geoip_lookup(ip)
-        timestamp=dt.now().strftime("%Y-%m-%d %H:%M:%S")
-        
+        timestamp = dt.now().strftime("%Y-%m-%d %H:%M:%S")
+
         log_msg = create_alert_log_msg(timestamp, ip, port, service, data, geo, threats)
         save_log_and_send_telegram(log_msg)
 
@@ -88,7 +90,9 @@ def start_server(port: int, service: str):
     while True:
         client_socket, addr = server.accept()
         ip = addr[0]
-        thread = threading.Thread(target=handle_client, args=(client_socket, ip, port, service))
+        thread = threading.Thread(
+            target=handle_client, args=(client_socket, ip, port, service)
+        )
         thread.start()
 
 

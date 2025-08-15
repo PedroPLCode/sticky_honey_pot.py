@@ -3,6 +3,7 @@ import requests
 import smtplib
 from utils.logger import save_log
 
+
 def retry_connection(max_retries=3, delay=1):
     """
     Decorator to retry a function upon connection-related exceptions.
@@ -19,7 +20,8 @@ def retry_connection(max_retries=3, delay=1):
 
     Raises:
             Exception: If the maximum number of retries is reached and the function still fails.
-        """
+    """
+
     def retry_connection_decorator(func):
         def retry_connection_wrapper(*args, **kwargs):
             retries = 0
