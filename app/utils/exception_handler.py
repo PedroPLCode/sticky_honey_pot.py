@@ -25,7 +25,7 @@ def exception_handler(default_return: object = None) -> Callable[[F], F]:
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                from utils.alert_logs_utils import save_log_and_send_telegram
+                from utils.alert_utils import save_log_and_send_telegram
 
                 save_log_and_send_telegram(f"Exception in {func.__name__}: {str(e)}")
             return default_return

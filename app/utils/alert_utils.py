@@ -1,9 +1,7 @@
-import os
-from datetime import datetime as dt
 from utils.retry_connection import retry_connection
 from utils.exception_handler import exception_handler
-from app.utils.telegram_utils import send_telegram
-from config import LOG_DIR
+from utils.telegram_utils import send_telegram
+from utils.logs_utils import write_log
 
 
 @exception_handler(default_return=False)
@@ -16,7 +14,7 @@ def save_log_and_send_telegram(msg: str):
     Args:
         msg (str): The message to be logged and sent via Telegram.
     """
-    save_log(msg)
+    write_log(msg)
     send_telegram(msg)
     
     
@@ -54,31 +52,3 @@ def create_alert_log_msg(
         alert_log_msg += f"Threats: {', '.join(threats)}\n"
 
     return alert_log_msg
-
-
-@exception_handler()
-def save_log(log_msg: str):
-    """
-    Saves a log message to a daily log file and prints it to the console.
-
-    The log file is created in the directory specified by LOG_DIR, with the filename
-    formatted as 'honeypot_log_<YYYY-MM-DD>.txt'. Each log entry is prepended with a
-    timestamp in the format 'YYYY-MM-DD HH:MM:SS'.
-
-    Args:
-        log_msg (str): The message to be logged.
-
-    Raises:
-        OSError: If the log directory cannot be created or the log file cannot be written.
-    """
-    log_dir = LOG_DIR
-    os.makedirs(log_dir, exist_ok=True)
-
-    timestamp = dt.now().strftime("%Y-%m-%d %H:%M:%S")
-    date_str = timestamp.split(" ")[0]
-    log_file = os.path.join(log_dir, f"honeypot_log_{date_str}.txt")
-
-    with open(log_file, "a", encoding="utf-8") as f:
-        f.write(f"[{timestamp}] {log_msg}\n")
-
-    print(f"[{timestamp}] {log_msg}\n")

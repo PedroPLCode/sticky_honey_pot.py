@@ -22,9 +22,9 @@ import socket
 import threading
 from datetime import datetime as dt
 from utils.exception_handler import exception_handler
-from app.utils.alert_logs_utils import create_alert_log_msg
-from app.utils.geoip_lookup import geoip_lookup
-from utils.alert_logs_utils import save_log_and_send_telegram
+from utils.alert_utils import create_alert_log_msg
+from utils.geoip_lookup import geoip_lookup
+from utils.alert_utils import save_log_and_send_telegram
 from utils.exploit_detector import detect_exploit
 from config import BANNER, PORTS
 

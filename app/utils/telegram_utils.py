@@ -3,7 +3,7 @@ import traceback
 from telegram import Bot
 from utils.retry_connection import retry_connection
 from utils.exception_handler import exception_handler
-from app.utils.alert_logs_utils import save_log
+from utils.logs_utils import write_log
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 
@@ -38,10 +38,10 @@ def send_telegram(msg: str) -> bool:
         else:
             asyncio.run(send())
 
-        save_log(f"Telegram {TELEGRAM_CHAT_ID} sent successfully.")
+        write_log(f"Telegram {TELEGRAM_CHAT_ID} sent successfully.")
         return True
 
     except Exception as e:
         tb = traceback.format_exc()
-        save_log(f"[Telegram] Sending failed: {e}\n{tb}")
+        write_log(f"[Telegram] Sending failed: {e}\n{tb}")
         return False
