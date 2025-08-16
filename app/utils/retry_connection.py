@@ -2,7 +2,8 @@ import time
 import requests
 import smtplib
 from typing import Callable, Any, TypeVar
-from utils.logs_utils import write_log
+from app.utils.logs_utils import write_log
+
 F = TypeVar("F", bound=Callable[..., Any])
 
 
@@ -23,6 +24,7 @@ def retry_connection(max_retries: int = 3, delay: int = 1):
     Raises:
             Exception: If the maximum number of retries is reached and the function still fails.
     """
+
     def retry_connection_decorator(func: F) -> F:
         def retry_connection_wrapper(*args: Any, **kwargs: dict[str, Any]) -> Any:
             retries = 0

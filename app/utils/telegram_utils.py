@@ -1,10 +1,10 @@
 import asyncio
 import traceback
 from telegram import Bot
-from utils.retry_connection import retry_connection
-from utils.exception_handler import exception_handler
-from utils.logs_utils import write_log
-from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+from app.utils.retry_connection import retry_connection
+from app.utils.exception_handler import exception_handler
+from app.utils.logs_utils import write_log
+from app.config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 
 @exception_handler()

@@ -5,12 +5,12 @@ Modules:
     - socket: For network communication.
     - threading: For handling multiple connections concurrently.
     - datetime: For timestamping events.
-    - utils.exception_handler: Decorator for exception handling.
-    - utils.alert_logs_utils: For creating log messages.
-    - utils.geoip: For GeoIP lookups.
-    - utils.telegram_utils: For logging and sending Telegram alerts.
-    - utils.exploit_detector: For exploit detection.
-    - config: Contains service banners and port mappings.
+    - app.utils.exception_handler: Decorator for exception handling.
+    - app.utils.alert_logs_utils: For creating log messages.
+    - app.utils.geoip: For GeoIP lookups.
+    - app.utils.telegram_utils: For logging and sending Telegram alerts.
+    - app.utils.exploit_detector: For exploit detection.
+    - app.config: Contains service banners and port mappings.
 Functions:
     - handle_client(client_socket, ip, port, service): Handles a single client connection, processes data, detects threats, logs, and alerts.
     - start_server(port, service): Starts a honeypot server on a given port and service, spawning threads for each connection.
@@ -21,12 +21,12 @@ Execution:
 import socket
 import threading
 from datetime import datetime as dt
-from utils.exception_handler import exception_handler
-from utils.alert_utils import create_alert_log_msg
-from utils.geoip_lookup import geoip_lookup
-from utils.alert_utils import save_log_and_send_telegram
-from utils.exploit_detector import detect_exploit
-from config import BANNER, PORTS
+from app.utils.exception_handler import exception_handler
+from app.utils.alert_utils import create_alert_log_msg
+from app.utils.geoip_lookup import geoip_lookup
+from app.utils.alert_utils import save_log_and_send_telegram
+from app.utils.exploit_detector import detect_exploit
+from app.config import BANNER, PORTS
 
 
 def handle_client(client_socket: socket.socket, ip: str, port: int, service: str):

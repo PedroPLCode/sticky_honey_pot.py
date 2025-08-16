@@ -1,7 +1,7 @@
 import os
 from datetime import datetime as dt
-from utils.exception_handler import exception_handler
-from config import LOG_DIR
+from app.utils.exception_handler import exception_handler
+from app.config import LOG_DIR
 
 
 @exception_handler()
@@ -30,4 +30,3 @@ def write_log(log_msg: str):
         f.write(f"[{timestamp}] {log_msg}\n")
 
     print(f"[{timestamp}] {log_msg}\n")
-    

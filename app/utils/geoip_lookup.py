@@ -1,7 +1,7 @@
 import requests
-from utils.retry_connection import retry_connection
-from utils.exception_handler import exception_handler
-from config import IP_API_URL
+from app.utils.retry_connection import retry_connection
+from app.utils.exception_handler import exception_handler
+from app.config import IP_API_URL
 
 
 @exception_handler()

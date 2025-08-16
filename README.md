@@ -44,13 +44,16 @@ TELEGRAM_CHAT_ID = 'your-telegram-chat-id'
 5. Check and change config.py if needed.
 6. Run tests:
 ```bash
-pytest
+python3 -m pytest
 ```
-7. Run the app, tweak, pimp, improve and have fun.
+7. Run the app.
+```bash
+python3 -m app.honeypot
+```
+8. Tweak, pimp, improve and have fun.
 
 ## Testing
-The project includes a test suite that can be executed using pytest. To run the tests, simply use:
-pytest
+The project includes a test suite that can be executed using pytest. To run the tests, simply use pytest.
 
 
 ## Important! 

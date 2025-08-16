@@ -1,7 +1,7 @@
-from utils.retry_connection import retry_connection
-from utils.exception_handler import exception_handler
-from utils.telegram_utils import send_telegram
-from utils.logs_utils import write_log
+from app.utils.retry_connection import retry_connection
+from app.utils.exception_handler import exception_handler
+from app.utils.telegram_utils import send_telegram
+from app.utils.logs_utils import write_log
 
 
 @exception_handler(default_return=False)
@@ -16,8 +16,8 @@ def save_log_and_send_telegram(msg: str):
     """
     write_log(msg)
     send_telegram(msg)
-    
-    
+
+
 @exception_handler()
 def create_alert_log_msg(
     timestamp: str,
